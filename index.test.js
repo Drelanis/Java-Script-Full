@@ -1,15 +1,17 @@
 import importType from 'eslint-plugin-import/lib/core/importType';
-import { getEvenNumbers } from './index.js';
+import { getSquaredArray, getOddNumbers, getSum } from './index.js';
 
-it('17 is equal 17', () => {
-  expect(17).toEqual(17);
+it('should get squarred numbers in array', () => {
+  const result = getSquaredArray([1, 2, 3, 4]);
+  expect(result).toEqual([1, 4, 9, 16]);
 });
 
-it('17 is not equal 18', () => {
-  expect(17).not.toEqual(18);
+it('should get odd numbers in array', () => {
+  const result = getOddNumbers([1, 2, 3, 4]);
+  expect(result).toEqual([1, 3]);
 });
 
-it('should get return even numbers from array', () => {
-  const result = getEvenNumbers([1, 2, 3, 4, 5]);
-  expect(result).toEqual([2, 4]);
+it('should get sum numbers in array', () => {
+  const result = getSum(1, 7);
+  expect(result).toEqual(8);
 });
