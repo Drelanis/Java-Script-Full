@@ -1,5 +1,5 @@
 import importType from 'eslint-plugin-import/lib/core/importType';
-import { getSquaredArray, getOddNumbers, getSum } from './index.js';
+import { getSquaredArray, getOddNumbers, getSum } from './calculator.js';
 
 it('should get squarred numbers in array', () => {
   const result = getSquaredArray([1, 2, 3, 4]);
