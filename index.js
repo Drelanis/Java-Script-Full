@@ -1,19 +1,33 @@
-export const reverseArray = array => {
-  const reverseArrayResult = [...array];
-  if (!Array.isArray(array)) {
-    return null;
-  }
-  return reverseArrayResult.reverse();
+'use strict';
+
+export const tasks = [
+  { text: 'Buy milk', done: false },
+  { text: 'Pick up Tom from airport', done: false },
+  { text: 'Visit party', done: false },
+  { text: 'Visit doctor', done: true },
+  { text: 'Buy meat', done: true },
+];
+
+const renderTasks = tasksList => {
+  const listElem = document.querySelector('.list');
+
+  const listItemsElements = tasksList
+    .sort((a, b) => a.done - b.done)
+    .map(({ text, done }) => {
+      const listItemElem = document.createElement('li');
+      listItemElem.classList.add('list__item');
+      if (done) {
+        listItemElem.classList.add('list__item_done');
+      }
+      const checkboxElem = document.createElement('input');
+      checkboxElem.setAttribute('type', 'checkbox');
+      checkboxElem.checked = done;
+      checkboxElem.classList.add('list__item-checkbox');
+      listItemElem.append(checkboxElem, text);
+      return listItemElem;
+    });
+
+  listElem.append(...listItemsElements);
 };
 
-export const withdraw = (clients, balances, client, amount) => {
-  if (amount > balances[clients.indexOf(client)]) {
-    return -1;
-  }
-  return balances[clients.indexOf(client)] - amount;
-};
-
-const ADULT_AGE = 18;
-
-export const getAdults = obj =>
-  Object.fromEntries(Object.entries(obj).filter(element => element[1] >= ADULT_AGE));
+renderTasks(tasks);
