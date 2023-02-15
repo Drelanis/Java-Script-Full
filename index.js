@@ -14,9 +14,11 @@ const clearContent = () => {
   inputField.replaceChildren();
 };
 
-const removeContent = () => {};
+const removeContent = () => {
+  inputField.removeEventListener('click', getTagElementWithColor);
+};
 
-const attachContent = () => {};
+// const attachContent = () => {};
 
 const logGreenDiv = getTagElementWithColor.bind(null, 'green', 'DIV');
 const logGreenP = getTagElementWithColor.bind(null, 'green', 'P');
@@ -28,6 +30,8 @@ const logGreySpan = getTagElementWithColor.bind(null, 'grey', 'SPAN');
 
 const clearField = clearContent.bind(null);
 
+// ====================>
+
 divElement.addEventListener('click', logGreyDiv, true);
 pElement.addEventListener('click', logGreyP, true);
 spanElement.addEventListener('click', logGreySpan, true);
@@ -38,4 +42,4 @@ spanElement.addEventListener('click', logGreenSpan);
 
 clearButton.addEventListener('click', clearField);
 
-buttonRemoveHandleds.removeEventListener('event', getTagElementWithColor);
+buttonRemoveHandleds.addEventListener('click', removeContent);
