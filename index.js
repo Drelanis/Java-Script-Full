@@ -1,20 +1,41 @@
-export const getTitle = () => {
-  return document.querySelector('.title').textContent;
+const divElement = document.querySelector('.rect_div');
+const pElement = document.querySelector('.rect_p');
+const spanElement = document.querySelector('.rect_span');
+const clearButton = document.querySelector('.clear-btn');
+const inputField = document.querySelector('.events-list');
+const buttonRemoveHandleds = document.querySelector('.remove-handlers-btn');
+const buttonAttachHandleds = document.querySelector('.attach-handlers-btn');
+
+const getTagElementWithColor = (color, text) => {
+  inputField.innerHTML += `<span style="color: ${color}; margin-left: 8px">${text}</span>`;
 };
 
-export const getDescription = () => {
-  return document.querySelector('.about').innerText;
+const clearContent = () => {
+  inputField.replaceChildren();
 };
 
-export const getPlans = () => {
-  return document.querySelector('.plans').innerHTML;
-};
+const removeContent = () => {};
 
-export const getGoal = () => {
-  return document.querySelector('.goal').outerHTML;
-};
+const attachContent = () => {};
 
-console.log(getTitle());
-console.log(getDescription());
-console.log(getPlans());
-console.log(getGoal());
+const logGreenDiv = getTagElementWithColor.bind(null, 'green', 'DIV');
+const logGreenP = getTagElementWithColor.bind(null, 'green', 'P');
+const logGreenSpan = getTagElementWithColor.bind(null, 'green', 'SPAN');
+
+const logGreyDiv = getTagElementWithColor.bind(null, 'grey', 'DIV');
+const logGreyP = getTagElementWithColor.bind(null, 'grey', 'P');
+const logGreySpan = getTagElementWithColor.bind(null, 'grey', 'SPAN');
+
+const clearField = clearContent.bind(null);
+
+divElement.addEventListener('click', logGreyDiv, true);
+pElement.addEventListener('click', logGreyP, true);
+spanElement.addEventListener('click', logGreySpan, true);
+
+divElement.addEventListener('click', logGreenDiv);
+pElement.addEventListener('click', logGreenP);
+spanElement.addEventListener('click', logGreenSpan);
+
+clearButton.addEventListener('click', clearField);
+
+buttonRemoveHandleds.removeEventListener('event', getTagElementWithColor);
