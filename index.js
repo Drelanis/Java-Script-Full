@@ -11,14 +11,8 @@ const getTagElementWithColor = (color, text) => {
 };
 
 const clearContent = () => {
-  inputField.replaceChildren();
+  inputField.innerHTML = '';
 };
-
-const removeContent = () => {
-  inputField.removeEventListener('click', getTagElementWithColor);
-};
-
-// const attachContent = () => {};
 
 const logGreenDiv = getTagElementWithColor.bind(null, 'green', 'DIV');
 const logGreenP = getTagElementWithColor.bind(null, 'green', 'P');
@@ -28,18 +22,26 @@ const logGreyDiv = getTagElementWithColor.bind(null, 'grey', 'DIV');
 const logGreyP = getTagElementWithColor.bind(null, 'grey', 'P');
 const logGreySpan = getTagElementWithColor.bind(null, 'grey', 'SPAN');
 
-const clearField = clearContent.bind(null);
+const attachContent = () => {
+  divElement.addEventListener('click', logGreyDiv, true);
+  pElement.addEventListener('click', logGreyP, true);
+  spanElement.addEventListener('click', logGreySpan, true);
+
+  divElement.addEventListener('click', logGreenDiv);
+  pElement.addEventListener('click', logGreenP);
+  spanElement.addEventListener('click', logGreenSpan);
+};
+
+const removeContent = () => {
+  buttonAttachHandleds.removeEventListener('click', attachContent);
+};
 
 // ====================>
 
-divElement.addEventListener('click', logGreyDiv, true);
-pElement.addEventListener('click', logGreyP, true);
-spanElement.addEventListener('click', logGreySpan, true);
-
-divElement.addEventListener('click', logGreenDiv);
-pElement.addEventListener('click', logGreenP);
-spanElement.addEventListener('click', logGreenSpan);
+const clearField = clearContent.bind(null);
 
 clearButton.addEventListener('click', clearField);
 
 buttonRemoveHandleds.addEventListener('click', removeContent);
+
+buttonAttachHandleds.addEventListener('click', attachContent);
