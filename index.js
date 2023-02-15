@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+  attachContent();
+});
+
 const divElement = document.querySelector('.rect_div');
 const pElement = document.querySelector('.rect_p');
 const spanElement = document.querySelector('.rect_span');
@@ -33,7 +37,13 @@ const attachContent = () => {
 };
 
 const removeContent = () => {
-  buttonAttachHandleds.removeEventListener('click', attachContent);
+  divElement.removeEventListener('click', logGreyDiv, true);
+  pElement.removeEventListener('click', logGreyP, true);
+  spanElement.removeEventListener('click', logGreySpan, true);
+
+  divElement.removeEventListener('click', logGreenDiv);
+  pElement.removeEventListener('click', logGreenP);
+  spanElement.removeEventListener('click', logGreenSpan);
 };
 
 // ====================>
