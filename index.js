@@ -45,7 +45,7 @@ const getSeatSelect = event => {
   const getLineNumber = event.target.closest('.sector__line').dataset.lineNumber;
   const getSectorNumber = event.target.closest('.sector').dataset.sectorNumber;
 
-  boardELement.innerHTML = `S ${getSeatNumber} - L ${getLineNumber} - S ${getSectorNumber}`;
+  boardELement.innerHTML = `S ${getSectorNumber} - L ${getLineNumber} - S ${getSeatNumber}`;
 };
 
 arenaElement.addEventListener('click', getSeatSelect);
