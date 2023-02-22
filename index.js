@@ -1,32 +1,30 @@
 const tasks = [
-  { text: 'Buy milk', done: false },
-  { text: 'Pick up Tom from airport', done: false },
-  { text: 'Visit party', done: false },
-  { text: 'Visit doctor', done: true },
-  { text: 'Buy meat', done: true },
+  { text: 'Buy milk', done: false, id: (Math.random() * 10000).toFixed() },
+  { text: 'Pick up Tom from airport', done: false, id: (Math.random() * 10000).toFixed() },
+  { text: 'Visit party', done: false, id: (Math.random() * 10000).toFixed() },
+  { text: 'Visit doctor', done: true, id: (Math.random() * 10000).toFixed() },
+  { text: 'Buy meat', done: true, id: (Math.random() * 10000).toFixed() },
 ];
 
 const listElem = document.querySelector('.list');
 const buttonCreatTaskElement = document.querySelector('.create-task-btn');
 const inputTaskElement = document.querySelector('.task-input');
-let IDNumber = 0;
 
 const renderTasks = tasksList => {
+  listElem.innerHTML = '';
   const tasksElems = tasksList
     .sort((a, b) => a.done - b.done)
-    .map(({ text, done }) => {
+    .map(({ text, done, id }) => {
       const listItemElem = document.createElement('li');
       listItemElem.classList.add('list__item');
       const checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
       checkbox.classList.add('list__item-checkbox');
-      checkbox.dataset.id = IDNumber;
       checkbox.checked = done;
+      checkbox.setAttribute('data-id', id);
       if (done) {
         listItemElem.classList.add('list__item_done');
       }
-      checkbox.dataset.id = IDNumber;
-      IDNumber += 1;
       listItemElem.append(checkbox, text);
       return listItemElem;
     });
@@ -36,11 +34,10 @@ const renderTasks = tasksList => {
 renderTasks(tasks);
 
 const tasksToDo = event => {
-  if (event.target.dataset.id === undefined) {
+  if (event.target.getAttribute('type') !== 'checkbox') {
     return;
   }
-  tasks[Number(event.target.dataset.id)].done = event.target.checked;
-  listElem.innerHTML = '';
+  tasks.find(element => element.id === event.target.getAttribute('data-id')).done = true;
   renderTasks(tasks);
 };
 
@@ -48,8 +45,11 @@ const addNewTasks = () => {
   if (inputTaskElement.value === '') {
     return;
   }
-  tasks.push({ text: `${inputTaskElement.value}`, done: false });
-  listElem.innerHTML = '';
+  tasks.push({
+    text: `${inputTaskElement.value}`,
+    done: false,
+    id: (Math.random() * 10000).toFixed(),
+  });
   renderTasks(tasks);
 };
 
