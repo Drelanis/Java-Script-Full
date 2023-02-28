@@ -8,6 +8,8 @@ const students = [
   { name: 'Kate', birthDate: '03/06/2006' },
   { name: 'Alex', birthDate: '04/17/1950' },
   { name: 'Sam', birthDate: '04/10/2010' },
+  { name: 'Sam2', birthDate: '12/19/2010' },
+  { name: 'Sam1', birthDate: '12/17/2011' },
 ];
 
 // const example = {
@@ -22,17 +24,22 @@ const students = [
 //   ],
 // };
 
-export const formatter = new Intl.DateTimeFormat('en', {
+const formatter = new Intl.DateTimeFormat('en', {
   timeZone: 'UTC',
   month: 'short',
 });
 
-export const getNamesSortedByDate = objectStudentBirth =>
+const getDayOfTheMonth = date => new Date(date).toDateString().split(' ')[2];
+
+const getNamesSortedByDate = objectStudentBirth =>
   Object.fromEntries(
     Object.entries(objectStudentBirth).map(([month, studentsByMonth]) => [
       month,
       studentsByMonth
-        .sort((fromDate, toDate) => new Date(fromDate.birthDate) - new Date(toDate.birthDate))
+        .sort(
+          (fromDate, toDate) =>
+            getDayOfTheMonth(fromDate.birthDate) - getDayOfTheMonth(toDate.birthDate),
+        )
         .map(element => element.name),
     ]),
   );
